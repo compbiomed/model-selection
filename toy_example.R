@@ -45,6 +45,20 @@ data.norm <- normData(training = data.prepared$training,
                       testing = data.prepared$testing)
 
 
+
+## Biomarker / Feature Selection
+
+biomarker_lasso <- getSignatureFromMultipleGlmnet(dataFrame = t(data.example$df.training),
+                               targetVec = data.norm$trainTransformed$Class,
+                               logisticRegression = TRUE,
+                               nRun=20)
+
+
+
+
+
+
+
 ### Model selection
 
 model.selection.output <- modelSelection(df.training = data.norm$trainTransformed,
@@ -76,3 +90,7 @@ predicttion.ensemble <- predictAndEvaluation(model.best = model.selection.output
                                     test.data = data.norm$testTransformed,
                                     prevalence = 0.1,
                                     is.ensemble = TRUE)
+
+
+
+
